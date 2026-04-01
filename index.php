@@ -1,3 +1,9 @@
+<?php
+  session_start();
+  require_once("config/koneksi.php");
+  if(isset($_SESSION['Username'])){
+?>
+
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -58,6 +64,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
       </li>
 
+      
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -109,7 +116,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="index.php?page=mapel" class="nav-link active"> 
                   <i class="far fa-circle nav-icon"></i>
                   <p>Mata Pelajaran</p>
                 </a>
@@ -119,10 +126,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <i class="far fa-circle nav-icon"></i>
                   <p>Guru</p>
                 </a>
+              </li><li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Siswa</p>
+                </a>
+              </li><li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kelas</p>
+                </a>
               </li>
             </ul>
           </li>
-            <li class="nav-item">
+          <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -137,20 +154,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Jadwal</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Guru</p>
-                </a>
-              </li>
+            
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="logout.php" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Logout
-               
               </p>
             </a>
           </li>
@@ -184,23 +195,36 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-12">
+        <div class="col-lg-12">
+          <div class="col-lg-6">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Card title</h5>
 
                 <p class="card-text">
-                  Selamat Datang di Sistem Jadwal Guru pada SMA/SMK XYZ 
+                  <?php
+  if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+  } else {
+    $page = "";
+  }
+  if ($page == "") {
+    include "page/dashboard.php";
+  } elseif (!file_exists("page/$page.php")) {
+    echo "File Tidak Diitemukan";
+  } else {
+    include "page/$page.php";
+  }
+?>
                 </p>
 
-          
+               
               </div>
             </div>
 
-            <div class="card card-primary card-outline">
+            
+          </div>
           <!-- /.col-md-6 -->
-        
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -241,3 +265,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="dist/js/adminlte.min.js"></script>
 </body>
 </html>
+<?php
+  }else{
+    echo"<meta http-equiv='refresh'content='0 url =login.php'>";
+  }
+  ?>
