@@ -1,70 +1,70 @@
 <div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Tambah Data Kelas</h1>
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Data Kelas</h1>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<?php
-if(isset($_POST['tambah'])){
-    $nama_kelas   = $_POST['nama_kelas'];
-    $wali_kelas   = $_POST['wali_kelas'];
-    $jumlah_siswa = $_POST['jumlah_siswa'];
-    $keterangan   = $_POST['keterangan'];
-
-    // Karena id_kelas adalah AUTO_INCREMENT, kita masukkan NULL atau lewatkan kolomnya
-    $insert = mysqli_query($koneksi, "INSERT INTO kelas (nama_kelas, wali_kelas, jumlah_siswa, keterangan) 
-              VALUES ('$nama_kelas', '$wali_kelas', '$jumlah_siswa', '$keterangan')");
-    
-    if ($insert) {
-        echo '<div class="alert alert-info alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-info"></i> Info </h5>
-            <h4>Berhasil Disimpan</h4></div>';
-        echo '<meta http-equiv="refresh" content="1;url=index.php?page=kelas">';
+    <?php
+    //kode otomatis
+    $carikode = mysqli_query($koneksi, "select max(Id_kelas) from kelas") or die (
+        mysqli_error($koneksi));
+    $datakode = mysqli_fetch_array($carikode);
+    if($datakode[0] != NULL) {
+        $kode = (int)$datakode[0] + 1;
     } else {
-        echo '<div class="alert alert-warning alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-exclamation-triangle"></i> Info </h5>
-            <h4>Gagal Disimpan: ' . mysqli_error($koneksi) . '</h4></div>';
+        $kode = 1001;
     }
-}
-?>
 
-<section class="content">
-  <div class="container-fluid">
-    <div class="card">
-      <div class="card-body">
-          <form method="POST" action="">
-            <div class="form-group">
-              <label for="nama_kelas">Nama Kelas</label>
-              <input type="text" name="nama_kelas" id="nama_kelas" placeholder="Contoh: XI RPL 1" class="form-control" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="wali_kelas">Wali Kelas</label>
-              <input type="text" name="wali_kelas" id="wali_kelas" placeholder="Nama Guru Wali Kelas" class="form-control">
-            </div>
+    $hasilkode = str_pad($kode, 3, "0", STR_PAD_LEFT);
+    $_SESSION["KODE"] = $hasilkode;
 
-            <div class="form-group">
-              <label for="jumlah_siswa">Jumlah Siswa</label>
-              <input type="number" name="jumlah_siswa" id="jumlah_siswa" placeholder="0" class="form-control">
-            </div>
+    if(isset($_POST['tambah'])){
+        $id_kelas = $_POST['Id_kelas'];
+        $nm_kelas = $_POST['nama_kelas'];
 
-            <div class="form-group">
-              <label for="keterangan">Keterangan</label>
-              <textarea name="keterangan" id="keterangan" rows="3" placeholder="Keterangan tambahan..." class="form-control"></textarea>
+        $insert = mysqli_query($koneksi, "INSERT INTO kelas values ('$id_kelas','$nm_kelas')");
+        
+        if ($insert) {
+            echo '<div class="alert alert-info-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fas fa-info"></i> Info </h5>
+                <h4>Berhasil Disimpan</h4></div>';
+            echo '<meta http-equiv="refresh" content="1;url=index.php?page=kelas">';
+        } else {
+            echo '<div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fas fa-info"></i> Info </h5>
+                <h4>Gagal Disimpan</h4></div>';
+        }
+    }
+    ?>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-body p-2">
+                        <form method="POST" action="">
+                            <div class="form-group">
+                                <label for="Id_kelas">Id kelas</label>
+                                <input type="text" name="Id_kelas" value="<?= $hasilkode; ?>"
+                                    placeholder="Id Kelas" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="nama_kelas">Nama kelas</label>
+                                <input type="text" name="nama_kelas" id="nama_kelas" 
+                                    placeholder="Nama kelas" class="form-control">
+                            </div>
+                            
+                            <div class="card-footer">
+                                <input type="submit" class="btn btn-primary" name="tambah" value="simpan">
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            <div class="card-footer px-0">
-              <input type="submit" class="btn btn-primary" name="tambah" value="Simpan Data">
-              <a href="index.php?page=kelas" class="btn btn-secondary">Kembali</a>
-            </div>
-          </form>
-      </div>
-    </div>
-  </div>
-</section>
+        </div>
+    </section>4
