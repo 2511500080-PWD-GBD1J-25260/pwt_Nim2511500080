@@ -1,3 +1,15 @@
+<?php
+if ($_SESSION['level'] != 'siswa' && $_SESSION['level'] != 'admin') {
+
+    echo "<script>
+    alert('Akses ditolak');
+    window.location='login.php';
+    </script>";
+
+    exit;
+
+}
+?>
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">

@@ -1,3 +1,9 @@
+<?php
+require_once "config/koneksi.php";
+
+/** @var mysqli $koneksi */
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,22 +73,81 @@
 </html>
 
 <?php
-session_start();
-include "config/koneksi.php";
-
-if(isset($_POST['login'])){
+if (isset($_POST['login'])) {
 
     $Username = $_POST['Username'];
     $Password = $_POST['Password'];
 
-    $query = mysqli_query($koneksi,"SELECT * FROM tabel_users WHERE Username='$Username' AND Password='$Password'");
-    $cek = mysqli_num_rows($query);
+    // cek kosong
+    if (empty($Username) || empty($Password)) {
 
-    if($cek > 0){
-        $_SESSION['Username']=$Username;
-        header("location:index.php");
-    }else{
-        echo "<script>alert('Username atau Password salah');</script>";
+        echo '<div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+        Data Tidak Boleh kosong
+        </div>';
+
+    } else {
+
+        // cek username
+        $userquery = mysqli_fetch_array(mysqli_query($koneksi,
+        "SELECT * FROM tabel_users WHERE Username='$Username'"));
+
+        // jika username ditemukan
+        if ($userquery) {
+
+            // cek password
+            if ($Password == $userquery['Password']) {
+
+                $_SESSION['level'] = $userquery['Role'];
+                $_SESSION['Username'] = $userquery['Username'];
+
+                // admin
+                if ($userquery['Role'] == 'admin') {
+
+                    header("location:index.php");
+
+                }
+
+                // guru / siswa
+                else if ($userquery['Role'] == 'guru' || $userquery['Role'] == 'siswa') {
+
+                    // password default
+                    if ($userquery['Password'] == '1234') {
+
+                        header("location:index.php?page=ganti_password");
+
+                    } else {
+
+                        header("location:index.php");
+
+                    }
+
+                }
+
+            } else {
+
+                // PASSWORD SALAH
+                echo '<div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                Password salah
+                </div>';
+
+            }
+
+        } else {
+
+            // USERNAME TIDAK ADA
+            echo '<div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+            Username tidak ditemukan
+            </div>';
+
+        }
+
     }
+
 }
 ?>

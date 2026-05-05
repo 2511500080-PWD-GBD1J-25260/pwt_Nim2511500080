@@ -2,6 +2,16 @@
 require_once "config/koneksi.php";
 
 /** @var mysqli $koneksi */
+if ($_SESSION['level'] != 'guru' && $_SESSION['level'] != 'admin') {
+
+    echo "<script>
+    alert('Akses ditolak');
+    window.location='login.php';
+    </script>";
+
+    exit;
+
+}
 ?>
 <div class="content-header">
   <div class="container-fluid">
