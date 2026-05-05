@@ -13653,7 +13653,7 @@ function drawRadiusLine(scale, gridLineOpts, radius, index) {
 		// Draw circular arcs between the points
 		ctx.arc(scale.xCenter, scale.yCenter, radius, 0, Math.PI * 2);
 	} else {
-		// Draw straight lines connecting each index
+		// Draw straight lines koneksiecting each index
 		pointPosition = scale.getPointPosition(0, radius);
 		ctx.moveTo(pointPosition.x, pointPosition.y);
 

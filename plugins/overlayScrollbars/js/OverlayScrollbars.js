@@ -2290,7 +2290,7 @@
                 var _mutationObserverContent;
                 var _mutationObserverHostCallback;
                 var _mutationObserverContentCallback;
-                var _mutationObserversConnected;
+                var _mutationObserverskoneksiected;
                 var _mutationObserverAttrsTextarea = ['wrap', 'cols', 'rows'];
                 var _mutationObserverAttrsHost = [LEXICON.i, LEXICON.c, LEXICON.s, 'open'].concat(_viewportAttrsFromTarget);
 
@@ -2551,7 +2551,7 @@
                                 var element = targetElement.contents()[0];
                                 var resizeObserverObj = element[_strResizeObserverProperty];
                                 if (resizeObserverObj) {
-                                    resizeObserverObj.disconnect();
+                                    resizeObserverObj.diskoneksiect();
                                     delete element[_strResizeObserverProperty];
                                 }
                             }
@@ -2711,10 +2711,10 @@
                 }
 
                 /**
-                 * Connects the MutationObservers if they are supported.
+                 * koneksiects the MutationObservers if they are supported.
                  */
-                function connectMutationObservers() {
-                    if (_supportMutationObserver && !_mutationObserversConnected) {
+                function koneksiectMutationObservers() {
+                    if (_supportMutationObserver && !_mutationObserverskoneksiected) {
                         _mutationObserverHost.observe(_hostElementNative, {
                             attributes: true,
                             attributeOldValue: true,
@@ -2730,19 +2730,19 @@
                             attributeFilter: _isTextarea ? _mutationObserverAttrsTextarea : _mutationObserverAttrsHost
                         });
 
-                        _mutationObserversConnected = true;
+                        _mutationObserverskoneksiected = true;
                     }
                 }
 
                 /**
-                 * Disconnects the MutationObservers if they are supported.
+                 * Diskoneksiects the MutationObservers if they are supported.
                  */
-                function disconnectMutationObservers() {
-                    if (_supportMutationObserver && _mutationObserversConnected) {
-                        _mutationObserverHost.disconnect();
-                        _mutationObserverContent.disconnect();
+                function diskoneksiectMutationObservers() {
+                    if (_supportMutationObserver && _mutationObserverskoneksiected) {
+                        _mutationObserverHost.diskoneksiect();
+                        _mutationObserverContent.diskoneksiect();
 
-                        _mutationObserversConnected = false;
+                        _mutationObserverskoneksiected = false;
                     }
                 }
 
@@ -2931,7 +2931,7 @@
 
                     var contentMeasureElement = getContentMeasureElement();
                     var textareaValueLength = _isTextarea && _widthAutoCache && !_textareaAutoWrappingCache ? _targetElement.val().length : 0;
-                    var setCSS = !_mutationObserversConnected && _widthAutoCache && !_isTextarea;
+                    var setCSS = !_mutationObserverskoneksiected && _widthAutoCache && !_isTextarea;
                     var css = {};
                     var float;
                     var bodyMinSizeC;
@@ -2967,7 +2967,7 @@
                  * @returns {boolean} True if one of the attributes which a MutationObserver would observe has changed, false or undefined otherwise.
                  */
                 function meaningfulAttrsChanged() {
-                    if (_sleeping || _mutationObserversConnected)
+                    if (_sleeping || _mutationObserverskoneksiected)
                         return;
 
                     var elem;
@@ -3347,12 +3347,12 @@
                     //set correct auto Update
                     if (autoUpdateChanged) {
                         if (autoUpdate === true || (autoUpdate === null && _autoUpdateRecommended)) {
-                            disconnectMutationObservers();
+                            diskoneksiectMutationObservers();
                             autoUpdateLoop.add(_base);
                         }
                         else {
                             autoUpdateLoop.remove(_base);
-                            connectMutationObservers();
+                            koneksiectMutationObservers();
                         }
                     }
 
@@ -3711,7 +3711,7 @@
                         }
                         if (widthAuto)
                             contentElementCSS[_strWidth] = _strHundredPercent;
-                        if (widthAuto && !_isBorderBox && !_mutationObserversConnected)
+                        if (widthAuto && !_isBorderBox && !_mutationObserverskoneksiected)
                             contentElementCSS[_strFloat] = 'none';
 
                         //apply and reset content style
@@ -5027,7 +5027,7 @@
                     var mouseDownPosition = {};
                     var mouseDownSize = {};
                     var mouseDownInvertedScale = {};
-                    var reconnectMutationObserver;
+                    var rekoneksiectMutationObserver;
 
                     function documentDragMove(event) {
                         if (onMouseTouchDownContinue(event)) {
@@ -5057,11 +5057,11 @@
                             _scrollbarCornerElement.releaseCapture();
 
                         if (eventIsTrusted) {
-                            if (reconnectMutationObserver)
-                                connectMutationObservers();
+                            if (rekoneksiectMutationObserver)
+                                koneksiectMutationObservers();
                             _base.update(_strAuto);
                         }
-                        reconnectMutationObserver = false;
+                        rekoneksiectMutationObserver = false;
                     }
                     function onMouseTouchDownContinue(event) {
                         var originalEvent = event.originalEvent || event;
@@ -5074,9 +5074,9 @@
 
                     addDestroyEventListener(_scrollbarCornerElement, _strMouseTouchDownEvent, function (event) {
                         if (onMouseTouchDownContinue(event) && !_resizeNone) {
-                            if (_mutationObserversConnected) {
-                                reconnectMutationObserver = true;
-                                disconnectMutationObservers();
+                            if (_mutationObserverskoneksiected) {
+                                rekoneksiectMutationObserver = true;
+                                diskoneksiectMutationObservers();
                             }
 
                             mouseDownPosition = getCoordinates(event);
@@ -5571,7 +5571,7 @@
                             }
                         }
                         else if (force === _strSync) {
-                            if (_mutationObserversConnected) {
+                            if (_mutationObserverskoneksiected) {
                                 mutHost = _mutationObserverHostCallback(_mutationObserverHost.takeRecords());
                                 mutContent = _mutationObserverContentCallback(_mutationObserverContent.takeRecords());
                             }
@@ -5631,7 +5631,7 @@
                 };
 
                 /**
-                 * Restore the DOM, disconnects all observers, remove all resize observers and put the instance to sleep.
+                 * Restore the DOM, diskoneksiects all observers, remove all resize observers and put the instance to sleep.
                  */
                 _base.destroy = function () {
                     if (_destroyed)
@@ -5640,8 +5640,8 @@
                     //remove this instance from auto update loop
                     autoUpdateLoop.remove(_base);
 
-                    //disconnect all mutation observers
-                    disconnectMutationObservers();
+                    //diskoneksiect all mutation observers
+                    diskoneksiectMutationObservers();
 
                     //remove all resize observers
                     setupResizeObserver(_sizeObserverElement);
@@ -6207,7 +6207,7 @@
                     var obj = {
                         destroyed: !!prepare(_destroyed),
                         sleeping: !!prepare(_sleeping),
-                        autoUpdate: prepare(!_mutationObserversConnected),
+                        autoUpdate: prepare(!_mutationObserverskoneksiected),
                         widthAuto: prepare(_widthAutoCache),
                         heightAuto: prepare(_heightAutoCache),
                         padding: prepare(_cssPaddingCache),

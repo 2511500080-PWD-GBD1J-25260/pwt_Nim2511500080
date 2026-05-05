@@ -43,7 +43,7 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
     "endinterface endmodule endpackage endprimitive endprogram endproperty endspecify endsequence endtable endtask " +
     "enum event eventually expect export extends extern final first_match for force foreach forever fork forkjoin " +
     "function generate genvar global highz0 highz1 if iff ifnone ignore_bins illegal_bins implements implies import " +
-    "incdir include initial inout input inside instance int integer interconnect interface intersect join join_any " +
+    "incdir include initial inout input inside instance int integer interkoneksiect interface intersect join join_any " +
     "join_none large let liblist library local localparam logic longint macromodule matches medium modport module " +
     "nand negedge nettype new nexttime nmos nor noshowcancelled not notif0 notif1 null or output package packed " +
     "parameter pmos posedge primitive priority program property protected pull0 pull1 pulldown pullup " +
@@ -82,7 +82,7 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
   var closingBracket = /[)}\]]/;
   var compilerDirectiveRegex      = new RegExp(
     "^(`(?:ifdef|ifndef|elsif|else|endif|undef|undefineall|define|include|begin_keywords|celldefine|default|" +
-    "nettype|end_keywords|endcelldefine|line|nounconnected_drive|pragma|resetall|timescale|unconnected_drive))\\b");
+    "nettype|end_keywords|endcelldefine|line|nounkoneksiected_drive|pragma|resetall|timescale|unkoneksiected_drive))\\b");
   var compilerDirectiveBeginRegex = /^(`(?:ifdef|ifndef|elsif|else))\b/;
   var compilerDirectiveEndRegex   = /^(`(?:elsif|else|endif))\b/;
 

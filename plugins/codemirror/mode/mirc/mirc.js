@@ -60,7 +60,7 @@ CodeMirror.defineMode("mirc", function() {
                             "away background ban bcopy beep bread break breplace bset btrunc bunset bwrite " +
                             "channel clear clearall cline clipboard close cnick color comclose comopen " +
                             "comreg continue copy creq ctcpreply ctcps dcc dccserver dde ddeserver " +
-                            "debug dec describe dialog did didtok disable disconnect dlevel dline dll " +
+                            "debug dec describe dialog did didtok disable diskoneksiect dlevel dline dll " +
                             "dns dqwindow drawcopy drawdot drawfill drawline drawpic drawrect drawreplace " +
                             "drawrot drawsave drawscroll drawtext ebeeps echo editbox emailaddr enable " +
                             "events exit fclose filter findtext finger firewall flash flist flood flush " +

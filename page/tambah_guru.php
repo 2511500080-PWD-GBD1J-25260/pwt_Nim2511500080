@@ -10,7 +10,7 @@
 <?php
 include "config/koneksi.php";
 //kode otomatis
-$carikode = mysqli_query($koneksi,"select max(Kd_guru) from guru") or die (mysqli_error($koneksi));
+$carikode = mysqli_query($koneksi,"select max(Kd_guru) from tabel_guru") or die (mysqli_error($koneksi));
 $datakode = mysqli_fetch_array($carikode);
 if($datakode[0] != NULL) {
     $nilaikode = substr($datakode[0], 2);
@@ -31,7 +31,7 @@ if(isset($_POST['tambah'])){
     $Hp = $_POST['Hp'];
     $Alamat = $_POST['Alamat'];
 
-    $insert = mysqli_query($koneksi, "INSERT INTO guru values ('$Kd_guru','$Id_user','$Nm_guru','$Jenkel','$Pend_terakhir','$Hp','$Alamat')");
+    $insert = mysqli_query($koneksi, "INSERT INTO tabel_guru values ('$Kd_guru','$Id_user','$Nm_guru','$Jenkel','$Pend_terakhir','$Hp','$Alamat')");
 
     if ($insert) {
         echo '<div class="alert alert-info-dismissible">

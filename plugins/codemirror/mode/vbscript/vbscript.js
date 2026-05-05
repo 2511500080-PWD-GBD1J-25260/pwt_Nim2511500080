@@ -69,7 +69,7 @@ CodeMirror.defineMode("vbscript", function(conf, parserConf) {
     var knownMethods = ['clear', 'execute', 'raise', 'replace', 'test', 'write', 'writeline', 'close', 'open', 'state', 'eof', 'update', 'addnew', 'end', 'createobject', 'quit'];
 
     var aspBuiltinObjsWords = ['server', 'response', 'request', 'session', 'application'];
-    var aspKnownProperties = ['buffer', 'cachecontrol', 'charset', 'contenttype', 'expires', 'expiresabsolute', 'isclientconnected', 'pics', 'status', //response
+    var aspKnownProperties = ['buffer', 'cachecontrol', 'charset', 'contenttype', 'expires', 'expiresabsolute', 'isclientkoneksiected', 'pics', 'status', //response
                               'clientcertificate', 'cookies', 'form', 'querystring', 'servervariables', 'totalbytes', //request
                               'contents', 'staticobjects', //application
                               'codepage', 'lcid', 'sessionid', 'timeout', //session
@@ -286,7 +286,7 @@ CodeMirror.defineMode("vbscript", function(conf, parserConf) {
         var style = state.tokenize(stream, state);
         var current = stream.current();
 
-        // Handle '.' connected identifiers
+        // Handle '.' koneksiected identifiers
         if (current === '.') {
             style = state.tokenize(stream, state);
 

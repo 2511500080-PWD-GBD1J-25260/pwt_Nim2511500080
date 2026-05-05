@@ -1,3 +1,8 @@
+<?php
+require_once "config/koneksi.php";
+
+/** @var mysqli $koneksi */
+?>
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -10,14 +15,14 @@
 
 <?php
 $kd = $_GET['kd'];
-$edit = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM mapel WHERE kd_mapel='$kd' "));
+$edit = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM tabel_mapel WHERE Kd_mapel='$kd' "));
 
 if(isset($_POST['tambah'])){
-    $kd_mapel = $_POST['kd_mapel'];
-    $nm_mapel = $_POST['nm_mapel'];
-    $kkm = $_POST['kkm'];
+    $kd_mapel = $_POST['Kd_mapel'];
+    $nm_mapel = $_POST['Nm_mapel'];
+    $kkm = $_POST['Kkm'];
 
-    $insert = mysqli_query($koneksi, "UPDATE mapel SET nm_mapel='$nm_mapel', kkm='$kkm' WHERE kd_mapel='$kd_mapel' ");
+    $insert = mysqli_query($koneksi, "UPDATE tabel_mapel SET nm_mapel='$nm_mapel', kkm='$kkm' WHERE Kd_mapel='$kd_mapel' ");
     
     if ($insert) {
         echo '<div class="alert alert-info-dismissible">
@@ -41,18 +46,18 @@ if(isset($_POST['tambah'])){
                 <div class="card-body p-2">
                     <form method="POST" action="">
                         <div class="form-group">
-                            <label for="kd_mapel">Kode Mapel</label>
-                            <input type="text" name="kd_mapel" value="<?= $edit['kd_mapel']; ?>" 
+                            <label for="Kd_mapel">Kode Mapel</label>
+                            <input type="text" name="Kd_mapel" value="<?= $edit['Kd_mapel']; ?>" 
                                 class="form-control" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="nm_mapel">Nama Mapel</label>
-                            <input type="text" name="nm_mapel" value="<?= $edit['nm_mapel']; ?>" 
+                            <label for="Nm_mapel">Nama Mapel</label>
+                            <input type="text" name="Nm_mapel" value="<?= $edit['Nm_mapel']; ?>" 
                                 id="nm_mapel" placeholder="Nama mapel" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="kkm">KKM</label>
-                            <input type="text" name="kkm" value="<?= $edit['kkm']; ?>" 
+                            <label for="Kkm">KKM</label>
+                            <input type="text" name="Kkm" value="<?= $edit['Kkm']; ?>" 
                                 id="kkm" placeholder="KKM" class="form-control">
                         </div>
                         

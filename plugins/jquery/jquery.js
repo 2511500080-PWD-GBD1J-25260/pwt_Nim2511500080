@@ -118,7 +118,7 @@ var document = window.document;
 				// Some browsers don't support the "nonce" property on scripts.
 				// On the other hand, just using `getAttribute` is not enough as
 				// the `nonce` attribute is reset to an empty string whenever it
-				// becomes browsing-context connected.
+				// becomes browsing-context koneksiected.
 				// See https://github.com/whatwg/html/issues/2369
 				// See https://html.spec.whatwg.org/#nonce-attributes
 				// The `node.getAttribute` check was added for the sake of
@@ -1430,8 +1430,8 @@ setDocument = Sizzle.setDocument = function( node ) {
 		assert( function( el ) {
 
 			// Check to see if it's possible to do matchesSelector
-			// on a disconnected node (IE 9)
-			support.disconnectedMatch = matches.call( el, "*" );
+			// on a diskoneksiected node (IE 9)
+			support.diskoneksiectedMatch = matches.call( el, "*" );
 
 			// This should fail with an exception
 			// Gecko does not error, returns false instead
@@ -1498,10 +1498,10 @@ setDocument = Sizzle.setDocument = function( node ) {
 		compare = ( a.ownerDocument || a ) == ( b.ownerDocument || b ) ?
 			a.compareDocumentPosition( b ) :
 
-			// Otherwise we know they are disconnected
+			// Otherwise we know they are diskoneksiected
 			1;
 
-		// Disconnected nodes
+		// Diskoneksiected nodes
 		if ( compare & 1 ||
 			( !support.sortDetached && b.compareDocumentPosition( a ) === compare ) ) {
 
@@ -1547,7 +1547,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 			ap = [ a ],
 			bp = [ b ];
 
-		// Parentless nodes are either documents or disconnected
+		// Parentless nodes are either documents or diskoneksiected
 		if ( !aup || !bup ) {
 
 			// Support: IE 11+, Edge 17 - 18+
@@ -1617,10 +1617,10 @@ Sizzle.matchesSelector = function( elem, expr ) {
 		try {
 			var ret = matches.call( elem, expr );
 
-			// IE 9's matchesSelector returns false on disconnected nodes
-			if ( ret || support.disconnectedMatch ||
+			// IE 9's matchesSelector returns false on diskoneksiected nodes
+			if ( ret || support.diskoneksiectedMatch ||
 
-				// As well, disconnected nodes are said to be in a document
+				// As well, diskoneksiected nodes are said to be in a document
 				// fragment in IE 9
 				elem.document && elem.document.nodeType !== 11 ) {
 				return ret;
@@ -4730,7 +4730,7 @@ var isHiddenWithinTree = function( elem, el ) {
 
 			// Otherwise, check computed style
 			// Support: Firefox <=43 - 45
-			// Disconnected elements can have computed display: none, so first confirm that elem is
+			// Diskoneksiected elements can have computed display: none, so first confirm that elem is
 			// in the document.
 			isAttached( elem ) &&
 
@@ -5951,7 +5951,7 @@ var
 
 	// Support: IE <=10 - 11, Edge 12 - 13 only
 	// In IE/Edge using regex groups here causes severe slowdowns.
-	// See https://connect.microsoft.com/IE/feedback/details/1736512/
+	// See https://koneksiect.microsoft.com/IE/feedback/details/1736512/
 	rnoInnerhtml = /<script|<style|<link/i,
 
 	// checked="checked" or checked
@@ -6816,7 +6816,7 @@ function getWidthOrHeight( elem, dimension, extra ) {
 		// Also use offsetWidth/offsetHeight for misreported inline dimensions (gh-3602)
 		!parseFloat( val ) && jQuery.css( elem, "display", false, styles ) === "inline" ) &&
 
-		// Make sure the element is visible & connected
+		// Make sure the element is visible & koneksiected
 		elem.getClientRects().length ) {
 
 		isBorderBox = jQuery.css( elem, "boxSizing", false, styles ) === "border-box";
@@ -7024,7 +7024,7 @@ jQuery.each( [ "height", "width" ], function( _i, dimension ) {
 					// Table columns in Safari have non-zero offsetWidth & zero
 					// getBoundingClientRect().width unless display is changed.
 					// Support: IE <=11 only
-					// Running getBoundingClientRect on a disconnected node
+					// Running getBoundingClientRect on a diskoneksiected node
 					// in IE throws an error.
 					( !elem.getClientRects().length || !elem.getBoundingClientRect().width ) ?
 					swap( elem, cssShow, function() {
@@ -7239,7 +7239,7 @@ Tween.propHooks = {
 };
 
 // Support: IE <=9 only
-// Panic based approach to setting things on disconnected nodes
+// Panic based approach to setting things on diskoneksiected nodes
 Tween.propHooks.scrollTop = Tween.propHooks.scrollLeft = {
 	set: function( tween ) {
 		if ( tween.elem.nodeType && tween.elem.parentNode ) {
@@ -10502,10 +10502,10 @@ jQuery.fn.extend( {
 			return;
 		}
 
-		// Return zeros for disconnected and hidden (display: none) elements (gh-2310)
+		// Return zeros for diskoneksiected and hidden (display: none) elements (gh-2310)
 		// Support: IE <=11 only
 		// Running getBoundingClientRect on a
-		// disconnected node in IE throws an error
+		// diskoneksiected node in IE throws an error
 		if ( !elem.getClientRects().length ) {
 			return { top: 0, left: 0 };
 		}

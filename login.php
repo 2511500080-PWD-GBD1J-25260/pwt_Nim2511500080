@@ -1,7 +1,3 @@
-<?php
-    include "config/koneksi.php";
-    session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,26 +67,22 @@
 </html>
 
 <?php
-if (isset($_POST['login'])) {
+session_start();
+include "config/koneksi.php";
+
+if(isset($_POST['login'])){
+
     $Username = $_POST['Username'];
     $Password = $_POST['Password'];
 
-    if (empty($Username) || empty($Password)) {
-        echo "Data Tidak Boleh kosong";
-    } else {
-        $userquery = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM users WHERE Username = '$Username' AND Password = '$Password' "));
-        
-        if ($userquery) {
-            $_SESSION['level'] = 'users';
-            $_SESSION['Username'] = $Username;
-            header("location:index.php");
-        } else {
-            echo '<div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-            Login gagal
-            </div>';
-        }
+    $query = mysqli_query($koneksi,"SELECT * FROM tabel_users WHERE Username='$Username' AND Password='$Password'");
+    $cek = mysqli_num_rows($query);
+
+    if($cek > 0){
+        $_SESSION['Username']=$Username;
+        header("location:index.php");
+    }else{
+        echo "<script>alert('Username atau Password salah');</script>";
     }
 }
 ?>

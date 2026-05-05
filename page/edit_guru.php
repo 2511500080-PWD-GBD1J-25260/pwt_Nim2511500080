@@ -1,40 +1,52 @@
+<?php
+require_once "config/koneksi.php";
+
+/** @var mysqli $koneksi */
+?>
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Edit Data Guru</h1>
+                <h1 class="m-0 text-dark">Edit Mata Pelajaran</h1>
             </div>
         </div>
     </div>
 </div>
 
 <?php
-include "config/koneksi.php";
 $kd = $_GET['kd'];
-$edit = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM guru WHERE Kd_guru='$kd'"));
+$edit = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM tabel_guru WHERE Kd_guru ='$kd' "));
 
 if(isset($_POST['tambah'])){
-    $Kd_guru = $_POST['Kd_guru'];
-    $Id_user = $_POST['Id_user'];
-    $Nm_guru = $_POST['Nm_guru'];
-    $Jenkel = $_POST['Jenkel'];
-    $Pend_terakhir = $_POST['Pend_terakhir'];
-    $Hp = $_POST['Hp'];
+    $kd_guru = $_POST['Kd_guru'];
+    $id_user = $_POST['Id_user'];
+    $nm_guru = $_POST['Nm_guru'];
+    $jenkel = $_POST['Jenkel'];
+    $pend_terakhir	 = $_POST['Pend_terakhir'];
+    $hp = $_POST['Hp'];
     $Alamat = $_POST['Alamat'];
 
-    $insert = mysqli_query($koneksi, "UPDATE guru SET Id_user='$Id_user', Nm_guru='$Nm_guru', Jenkel='$Jenkel', Pend_terakhir='$Pend_terakhir', Hp='$Hp', Alamat='$Alamat' WHERE Kd_guru='$Kd_guru'");
-
+    $insert = mysqli_query($koneksi, "UPDATE tabel_guru SET 
+        Kd_guru='$kd_guru',
+        Id_user='$id_user',
+        Nm_guru='$nm_guru',
+        Jenkel='$jenkel',
+        Pend_terakhir='$pend_terakhir',
+        Hp='$hp',
+        Alamat='$Alamat'
+    WHERE Kd_guru='$kd_guru'");
+    
     if ($insert) {
         echo '<div class="alert alert-info-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <h5><i class="icon fas fa-info"></i> Info </h5>
-        <h4>Berhasil Disimpan</h4></div>';
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h5><i class="icon fas fa-info"></i> Info </h5>
+            <h4>Berhasil Disimpan</h4></div>';
         echo '<meta http-equiv="refresh" content="1;url=index.php?page=guru">';
     } else {
         echo '<div class="alert alert-warning alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <h5><i class="icon fas fa-info"></i> Info </h5>
-        <h4>Gagal Disimpan</h4></div>';
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h5><i class="icon fas fa-info"></i> Info </h5>
+            <h4>Gagal Disimpan</h4></div>';
     }
 }
 ?>
@@ -46,51 +58,50 @@ if(isset($_POST['tambah'])){
                 <div class="card-body p-2">
                     <form method="POST" action="">
                         <div class="form-group">
-                            <label for="Kd_guru">Kode Guru</label>
-                            <input type="text" name="Kd_guru" value="<?= $edit['Kd_guru']; ?>" class="form-control" readonly>
+                            <label for="Kd_guru">kd guru</label>
+                            <input type="text" name="Kd_guru" value="<?= $edit['Kd_guru']; ?>" 
+                                placeholder="kd guru" class="form-control" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="Id_user">ID User</label>
-                            <input type="text" name="Id_user" id="Id_user" value="<?= $edit['Id_user']; ?>" class="form-control">
+                            <label for="Id_user">Id user</label>
+                            <input type="number" name="Id_user" id="Id_user"  value="<?= $edit['Id_user']; ?>" 
+                                placeholder="Id User" class="form-control">
                         </div>
-
                         <div class="form-group">
-                            <label for="Nm_guru">Nama Guru</label>
-                            <input type="text" name="Nm_guru" id="Nm_guru" value="<?= $edit['Nm_guru']; ?>" class="form-control">
+                            <label for="Nm_guru">Nama guru</label>
+                            <input type="text" name="Nm_guru" id="Nm_guru"  value="<?= $edit['Nm_guru']; ?>" 
+                                placeholder="Nama guru" class="form-control">
                         </div>
-                        
                         <div class="form-group">
                             <label for="Jenkel">Jenis Kelamin</label>
                             <select name="Jenkel" id="Jenkel" class="form-control">
                                 <option value="">-- Pilih --</option>
-                                <option value="L" <?= ($edit['Jenkel'] == 'L') ? 'selected' : '' ?>>Laki-laki</option>
-                                <option value="P" <?= ($edit['Jenkel'] == 'P') ? 'selected' : '' ?>>Perempuan</option>
+                                <option value="L">Laki-laki</option>
+                                <option value="P">Perempuan</option>
                             </select>
                         </div>
-                        
                         <div class="form-group">
-                            <label for="Pend_terakhir">Pendidikan Terakhir</label>
-                            <input type="text" name="Pend_terakhir" id="Pend_terakhir" value="<?= $edit['Pend_terakhir']; ?>" class="form-control">
+                            <label for="Pend_terakhir">Pendidikan terakhir</label>
+                            <input type="text" name="Pend_terakhir" id="Pend_terakhir"value="<?= $edit['Pend_terakhir']; ?>" 
+                                placeholder="Pendidikan terakhir" class="form-control">
                         </div>
-                        
                         <div class="form-group">
-                            <label for="Hp">No HP</label>
-                            <input type="text" name="Hp" id="Hp" value="<?= $edit['Hp']; ?>" class="form-control">
+                            <label for="Hp">Hp</label>
+                            <input type="text" name="Hp" id="Hp" value="<?= $edit['Hp']; ?>" 
+                                placeholder="Hp" class="form-control">
                         </div>
-                        
                         <div class="form-group">
                             <label for="Alamat">Alamat</label>
-                            <textarea name="Alamat" id="Alamat" class="form-control"><?= $edit['Alamat']; ?></textarea>
+                            <input type="text" name="Alamat" id="Alamat"  value="<?= $edit['Alamat']; ?>" 
+                                placeholder="Alamat" class="form-control">
                         </div>
+                        
                         <div class="card-footer">
-                            <input type="submit" class="btn btn-primary" name="tambah" value="Simpan">
-                            <a href="index.php?page=guru" class="btn btn-secondary">
-                                Batal
-                            </a>
+                            <input type="submit" class="btn btn-primary" name="tambah" value="simpan">
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</section>                    
+</section>

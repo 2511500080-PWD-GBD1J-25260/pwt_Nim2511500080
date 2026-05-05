@@ -1,44 +1,39 @@
+<?php
+require_once "config/koneksi.php";
+
+/** @var mysqli $koneksi */
+?>
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Edit Data Kelas</h1>
+                <h1 class="m-0 text-dark">Edit Kelas</h1>
             </div>
         </div>
     </div>
 </div>
 
 <?php
-// Mengambil ID dari URL
-$id = $_GET['id'];
-$edit = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM kelas WHERE id_kelas='$id' "));
+$kd = $_GET['kd'];
+$edit = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM tabel_kelas WHERE Id_kelas='$kd' "));
 
-if(isset($_POST['simpan'])){
-    $id_kelas     = $_POST['id_kelas'];
-    $nama_kelas   = $_POST['nama_kelas'];
-    $wali_kelas   = $_POST['wali_kelas'];
-    $jumlah_siswa = $_POST['jumlah_siswa'];
-    $keterangan   = $_POST['keterangan'];
+if(isset($_POST['tambah'])){
+    $id_kelas = $_POST['Id_kelas'];
+    $nm_kelas = $_POST['Nm_kelas'];
 
-    // Query Update
-    $update = mysqli_query($koneksi, "UPDATE kelas SET 
-        nama_kelas   = '$nama_kelas', 
-        wali_kelas   = '$wali_kelas', 
-        jumlah_siswa = '$jumlah_siswa', 
-        keterangan   = '$keterangan' 
-        WHERE id_kelas = '$id_kelas' ");
+    $insert = mysqli_query($koneksi, "UPDATE tabel_kelas SET Nm_kelas='$nm_kelas' WHERE Id_kelas='$id_kelas' ");
     
-    if ($update) {
-        echo '<div class="alert alert-info alert-dismissible">
+    if ($insert) {
+        echo '<div class="alert alert-info-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <h5><i class="icon fas fa-info"></i> Info </h5>
-            <h4>Berhasil Diperbarui</h4></div>';
+            <h4>Berhasil Disimpan</h4></div>';
         echo '<meta http-equiv="refresh" content="1;url=index.php?page=kelas">';
     } else {
         echo '<div class="alert alert-warning alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-exclamation-triangle"></i> Info </h5>
-            <h4>Gagal Diperbarui</h4></div>';
+            <h5><i class="icon fas fa-info"></i> Info </h5>
+            <h4>Gagal Disimpan</h4></div>';
     }
 }
 ?>
@@ -47,37 +42,24 @@ if(isset($_POST['simpan'])){
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="">
-                    <input type="hidden" name="id_kelas" value="<?= $edit['id_kelas']; ?>">
-
-                    <div class="form-group">
-                        <label for="nama_kelas">Nama Kelas</label>
-                        <input type="text" name="nama_kelas" value="<?= $edit['nama_kelas']; ?>" 
-                               id="nama_kelas" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="wali_kelas">Wali Kelas</label>
-                        <input type="text" name="wali_kelas" value="<?= $edit['wali_kelas']; ?>" 
-                               id="wali_kelas" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="jumlah_siswa">Jumlah Siswa</label>
-                        <input type="number" name="jumlah_siswa" value="<?= $edit['jumlah_siswa']; ?>" 
-                               id="jumlah_siswa" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="keterangan">Keterangan</label>
-                        <textarea name="keterangan" id="keterangan" class="form-control" rows="3"><?= $edit['keterangan']; ?></textarea>
-                    </div>
-                    
-                    <div class="card-footer px-0">
-                        <button type="submit" class="btn btn-primary" name="simpan">Simpan Perubahan</button>
-                        <a href="index.php?page=kelas" class="btn btn-secondary">Batal</a>
-                    </div>
-                </form>
+                <div class="card-body p-2">
+                    <form method="POST" action="">
+                        <div class="form-group">
+                            <label for="Id_kelas">Id kelas</label>
+                            <input type="number" name="Id_kelas" value="<?= $edit['Id_kelas']; ?>" value="<?= $edit['Id_kelas']; ?>" 
+                                class="form-control" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="Nm_kelas">Nama kelas</label>
+                            <input type="text" name="Nm_kelas" value="<?= $edit['Nm_kelas']; ?>" value="<?= $edit['Nm_kelas']; ?>" 
+                                id="Nm_kelas" placeholder="Nama kelas" class="form-control">
+                        </div>
+                        
+                        <div class="card-footer">
+                            <input type="submit" class="btn btn-primary" name="tambah" value="simpan">
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

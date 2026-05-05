@@ -4521,7 +4521,7 @@ S2.define('select2/dropdown/attachBody',[
 
     if (
       $.contains(document.body, $offsetParent[0]) ||
-      $offsetParent[0].isConnected
+      $offsetParent[0].iskoneksiected
       ) {
       parentOffset = $offsetParent.offset();
     }
@@ -5965,7 +5965,7 @@ S2.define('select2/core',[
     }
 
     if (this._observer != null) {
-      this._observer.disconnect();
+      this._observer.diskoneksiect();
       this._observer = null;
     } else if (this.$element[0].removeEventListener) {
       this.$element[0]

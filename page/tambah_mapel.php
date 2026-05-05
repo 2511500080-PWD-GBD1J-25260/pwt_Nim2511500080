@@ -1,3 +1,8 @@
+<?php
+require_once "config/koneksi.php";
+
+/** @var mysqli $koneksi */
+?>
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -9,7 +14,7 @@
 </div>
 <?php
 //kode otomatis
-$carikode = mysqli_query($koneksi, "select max(kd_mapel) from mapel") or die (
+$carikode = mysqli_query($koneksi, "select max(Kd_mapel) from tabel_mapel") or die (
     mysqli_error($koneksi));
 $datakode = mysqli_fetch_array($carikode);
 if($datakode) {
@@ -23,11 +28,11 @@ if($datakode) {
 $_SESSION["KODE"] = $hasilkode;
 
 if(isset($_POST['tambah'])){
-    $kd_mapel = $_POST['kd_mapel'];
-    $nm_mapel = $_POST['nm_mapel'];
-    $kkm = $_POST['kkm'];
+    $kd_mapel = $_POST['Kd_mapel'];
+    $nm_mapel = $_POST['Nm_mapel'];
+    $kkm = $_POST['Kkm'];
 
-    $insert = mysqli_query($koneksi, "INSERT INTO mapel values ('$kd_mapel','$nm_mapel','$kkm')");
+    $insert = mysqli_query($koneksi, "INSERT INTO tabel_mapel values ('$kd_mapel','$nm_mapel','$kkm')");
     
     if ($insert) {
         echo '<div class="alert alert-info-dismissible">
@@ -51,17 +56,17 @@ if(isset($_POST['tambah'])){
           <form method="POST" action="">
             <div class="form-group">
               <label for="kd_mapel">Kode Mapel</label>
-              <input type="text" name="kd_mapel" value="<?= $hasilkode; ?>" placeholder="Id Kat" class="form-control" readonly>
+              <input type="text" name="Kd_mapel" value="<?= $hasilkode; ?>" placeholder="Id Kat" class="form-control" readonly>
             </div>
             
             <div class="form-group">
               <label for="nm_mapel">Nama Mapel</label>
-              <input type="text" name="nm_mapel" id="nm_mapel" placeholder="Nama Mapel" class="form-control">
+              <input type="text" name="Nm_mapel" id="nm_mapel" placeholder="Nama Mapel" class="form-control">
             </div>
 
             <div class="form-group">
               <label for="kkm">KKM</label>
-              <input type="text" name="kkm" id="kkm" placeholder="KKM" class="form-control">
+              <input type="text" name="Kkm" id="kkm" placeholder="KKM" class="form-control">
             </div>
 
             <div class="card-footer">

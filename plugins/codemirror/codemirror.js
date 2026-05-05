@@ -1365,7 +1365,7 @@
 
   // Given a change object, compute the new set of marker spans that
   // cover the line in which the change took place. Removes spans
-  // entirely within the change, reconnects spans belonging to the
+  // entirely within the change, rekoneksiects spans belonging to the
   // same marker that appear on both sides of the change, and cuts off
   // spans partially within the change. Returns an array of span
   // arrays with one element for each line in (after) the change.
@@ -1470,7 +1470,7 @@
     return parts
   }
 
-  // Connect or disconnect spans from a line.
+  // koneksiect or diskoneksiect spans from a line.
   function detachMarkedSpans(line) {
     var spans = line.markedSpans;
     if (!spans) { return }
@@ -1996,7 +1996,7 @@
 
   // These objects are used to represent the visible (currently drawn)
   // part of the document. A LineView may correspond to multiple
-  // logical lines, if those are connected by collapsed ranges.
+  // logical lines, if those are koneksiected by collapsed ranges.
   function LineView(doc, line, lineN) {
     // The starting line
     this.line = line;
@@ -5977,7 +5977,7 @@
 
     var marker = new TextMarker(doc, type), diff = cmp(from, to);
     if (options) { copyObj(options, marker, false); }
-    // Don't connect empty markers unless clearWhenEmpty is false
+    // Don't koneksiect empty markers unless clearWhenEmpty is false
     if (diff > 0 || diff == 0 && marker.clearWhenEmpty !== false)
       { return marker }
     if (marker.replacedWith) {

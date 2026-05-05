@@ -48,7 +48,7 @@
             "Married": false
         },
         {
-            "Name": "Connor Johnston",
+            "Name": "koneksior Johnston",
             "Age": 73,
             "Country": 7,
             "Address": "Ap #370-4647 Dis Av.",
@@ -216,7 +216,7 @@
             "Married": true
         },
         {
-            "Name": "Keaton Oconnor",
+            "Name": "Keaton Okoneksior",
             "Age": 21,
             "Country": 1,
             "Address": "Ap #657-1093 Nec, Street",

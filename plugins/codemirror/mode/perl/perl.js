@@ -255,7 +255,7 @@ CodeMirror.defineMode("perl",function(){
                 foreach                         :[1,1],
                                                 //      PERL functions
                 'abs'                           :1,     // - absolute value function
-                accept                          :1,     // - accept an incoming socket connect
+                accept                          :1,     // - accept an incoming socket koneksiect
                 alarm                           :1,     // - schedule a SIGALRM
                 'atan2'                         :1,     // - arctangent of Y/X in the range -PI to PI
                 bind                            :1,     // - binds an address to a socket
@@ -273,7 +273,7 @@ CodeMirror.defineMode("perl",function(){
                 chroot                          :1,     // - make directory new root for path lookups
                 close                           :1,     // - close file (or pipe or socket) handle
                 closedir                        :1,     // - close directory handle
-                connect                         :1,     // - connect to a remote socket
+                koneksiect                         :1,     // - koneksiect to a remote socket
                 'continue'                      :[1,1], // - optional trailing block in a while or foreach
                 'cos'                           :1,     // - cosine function
                 crypt                           :1,     // - one-way passwd-style encryption
@@ -315,7 +315,7 @@ CodeMirror.defineMode("perl",function(){
                 getnetbyaddr                    :1,     // - get network record given its address
                 getnetbyname                    :1,     // - get networks record given name
                 getnetent                       :1,     // - get next networks record
-                getpeername                     :1,     // - find the other end of a socket connection
+                getpeername                     :1,     // - find the other end of a socket koneksiection
                 getpgrp                         :1,     // - get process group
                 getppid                         :1,     // - get parent process ID
                 getpriority                     :1,     // - get current nice value
@@ -372,7 +372,7 @@ CodeMirror.defineMode("perl",function(){
                 our                             : 2,    // - declare and assign a package variable (lexical scoping)
                 pack                            :1,     // - convert a list into a binary representation
                 'package'                       :1,     // - declare a separate global namespace
-                pipe                            :1,     // - open a pair of connected filehandles
+                pipe                            :1,     // - open a pair of koneksiected filehandles
                 pop                             :1,     // - remove the last element from an array and return it
                 pos                             :1,     // - find or set the offset for the last/next m//g search
                 print                           :1,     // - output a list to a filehandle
@@ -426,7 +426,7 @@ CodeMirror.defineMode("perl",function(){
                 shmget                          :1,     // - get SysV shared memory segment identifier
                 shmread                         :1,     // - read SysV shared memory
                 shmwrite                        :1,     // - write SysV shared memory
-                shutdown                        :1,     // - close down just half of a socket connection
+                shutdown                        :1,     // - close down just half of a socket koneksiection
                 'sin'                           :1,     // - return the sine of a number
                 sleep                           :1,     // - block for some number of seconds
                 socket                          :1,     // - create a socket

@@ -24,13 +24,13 @@
          end: "CodeMirror-merge-l-chunk-end",
          insert: "CodeMirror-merge-l-inserted",
          del: "CodeMirror-merge-l-deleted",
-         connect: "CodeMirror-merge-l-connect"}
+         koneksiect: "CodeMirror-merge-l-koneksiect"}
       : {chunk: "CodeMirror-merge-r-chunk",
          start: "CodeMirror-merge-r-chunk-start",
          end: "CodeMirror-merge-r-chunk-end",
          insert: "CodeMirror-merge-r-inserted",
          del: "CodeMirror-merge-r-deleted",
-         connect: "CodeMirror-merge-r-connect"};
+         koneksiect: "CodeMirror-merge-r-koneksiect"};
   }
 
   DiffView.prototype = {
@@ -39,7 +39,7 @@
       this.edit = this.mv.edit;
       ;(this.edit.state.diffViews || (this.edit.state.diffViews = [])).push(this);
       this.orig = CodeMirror(pane, copyObj({value: orig, readOnly: !this.mv.options.allowEditingOriginals}, copyObj(options)));
-      if (this.mv.options.connect == "align") {
+      if (this.mv.options.koneksiect == "align") {
         if (!this.edit.state.trackAlignable) this.edit.state.trackAlignable = new TrackAlignable(this.edit)
         this.orig.state.trackAlignable = new TrackAlignable(this.orig)
       }
@@ -101,9 +101,9 @@
         updateMarks(dv.orig, dv.diff, orig, DIFF_DELETE, dv.classes);
       }
 
-      if (dv.mv.options.connect == "align")
+      if (dv.mv.options.koneksiect == "align")
         alignChunks(dv);
-      makeConnections(dv);
+      makekoneksiections(dv);
       if (dv.needsScrollSync != null) syncScroll(dv, dv.needsScrollSync)
 
       updating = false;
@@ -136,7 +136,7 @@
     dv.orig.on("change", change);
     dv.edit.on("swapDoc", swapDoc);
     dv.orig.on("swapDoc", swapDoc);
-    if (dv.mv.options.connect == "align") {
+    if (dv.mv.options.koneksiect == "align") {
       CodeMirror.on(dv.edit.state.trackAlignable, "realign", setDealign)
       CodeMirror.on(dv.orig.state.trackAlignable, "realign", setDealign)
     }
@@ -148,11 +148,11 @@
 
   function registerScroll(dv, otherDv) {
     dv.edit.on("scroll", function() {
-      syncScroll(dv, true) && makeConnections(dv);
+      syncScroll(dv, true) && makekoneksiections(dv);
     });
     dv.orig.on("scroll", function() {
-      syncScroll(dv, false) && makeConnections(dv);
-      if (otherDv) syncScroll(otherDv, true) && makeConnections(otherDv);
+      syncScroll(dv, false) && makekoneksiections(dv);
+      if (otherDv) syncScroll(otherDv, true) && makekoneksiections(otherDv);
     });
   }
 
@@ -172,7 +172,7 @@
     if (editor.state.scrollSetBy == dv && (editor.state.scrollSetAt || 0) + 250 > now) return false;
 
     var sInfo = editor.getScrollInfo();
-    if (dv.mv.options.connect == "align") {
+    if (dv.mv.options.koneksiect == "align") {
       targetPos = sInfo.top;
     } else {
       var halfScreen = .5 * sInfo.clientHeight, midY = sInfo.top + halfScreen;
@@ -211,7 +211,7 @@
 
   function setScrollLock(dv, val, action) {
     dv.lockScroll = val;
-    if (val && action != false) syncScroll(dv, DIFF_INSERT) && makeConnections(dv);
+    if (val && action != false) syncScroll(dv, DIFF_INSERT) && makekoneksiections(dv);
     (val ? CodeMirror.addClass : CodeMirror.rmClass)(dv.lockButton, "CodeMirror-merge-scrolllock-enabled");
   }
 
@@ -312,7 +312,7 @@
 
   // Updating the gap between editor and original
 
-  function makeConnections(dv) {
+  function makekoneksiections(dv) {
     if (!dv.showDifferences) return;
 
     if (dv.svg) {
@@ -330,7 +330,7 @@
       var ch = dv.chunks[i];
       if (ch.editFrom <= vpEdit.to && ch.editTo >= vpEdit.from &&
           ch.origFrom <= vpOrig.to && ch.origTo >= vpOrig.from)
-        drawConnectorsForChunk(dv, ch, sTopOrig, sTopEdit, w);
+        drawkoneksiectorsForChunk(dv, ch, sTopOrig, sTopEdit, w);
     }
   }
 
@@ -485,7 +485,7 @@
     return cm.addLineWidget(line, elt, {height: size, above: above, mergeSpacer: true, handleMouseEvents: true});
   }
 
-  function drawConnectorsForChunk(dv, chunk, sTopOrig, sTopEdit, w) {
+  function drawkoneksiectorsForChunk(dv, chunk, sTopOrig, sTopEdit, w) {
     var flip = dv.type == "left";
     var top = dv.orig.heightAtLine(chunk.origFrom, "local", true) - sTopOrig;
     if (dv.svg) {
@@ -499,7 +499,7 @@
       var curveBot = " C " + w/2 + " " + botLpx + " " + w/2 + " " + botRpx + " -1 " + botRpx;
       attrs(dv.svg.appendChild(document.createElementNS(svgNS, "path")),
             "d", "M -1 " + topRpx + curveTop + " L " + (w + 2) + " " + botLpx + curveBot + " z",
-            "class", dv.classes.connect);
+            "class", dv.classes.koneksiect);
     }
     if (dv.copyButtons) {
       var copy = dv.copyButtons.appendChild(elt("div", dv.type == "left" ? "\u21dd" : "\u21dc",
@@ -580,7 +580,7 @@
       this.editor().operation(function() {
         collapseIdenticalStretches(self, options.collapseIdentical);
       });
-    if (options.connect == "align") {
+    if (options.koneksiect == "align") {
       this.aligners = [];
       alignChunks(this.left || this.right, true);
     }
@@ -589,8 +589,8 @@
 
 
     var onResize = function() {
-      if (left) makeConnections(left);
-      if (right) makeConnections(right);
+      if (left) makekoneksiections(left);
+      if (right) makekoneksiections(right);
     };
     CodeMirror.on(window, "resize", onResize);
     var resizeInterval = setInterval(function() {
@@ -618,7 +618,7 @@
       });
       gapElts.unshift(dv.copyButtons);
     }
-    if (dv.mv.options.connect != "align") {
+    if (dv.mv.options.koneksiect != "align") {
       var svg = document.createElementNS && document.createElementNS(svgNS, "svg");
       if (svg && !svg.createSVGRect) svg = null;
       dv.svg = svg;

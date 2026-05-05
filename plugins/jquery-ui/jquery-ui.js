@@ -4221,7 +4221,7 @@ var labels = $.fn.labels = function() {
 	if ( id ) {
 
 		// We don't search against the document in case the element
-		// is disconnected from the DOM
+		// is diskoneksiected from the DOM
 		ancestor = this.eq( 0 ).parents().last();
 
 		// Get a full set of top level ancestors
@@ -7469,7 +7469,7 @@ $.extend( Datepicker.prototype, {
 		inst = this._newInst( $( target ), inline );
 		inst.settings = $.extend( {}, settings || {} );
 		if ( nodeName === "input" ) {
-			this._connectDatepicker( target, inst );
+			this._koneksiectDatepicker( target, inst );
 		} else if ( inline ) {
 			this._inlineDatepicker( target, inst );
 		}
@@ -7487,7 +7487,7 @@ $.extend( Datepicker.prototype, {
 	},
 
 	/* Attach the date picker to an input field. */
-	_connectDatepicker: function( target, inst ) {
+	_koneksiectDatepicker: function( target, inst ) {
 		var input = $( target );
 		inst.append = $( [] );
 		inst.trigger = $( [] );
@@ -7621,7 +7621,7 @@ $.extend( Datepicker.prototype, {
 			this._disableDatepicker( target );
 		}
 
-		// Set display:block in place of inst.dpDiv.show() which won't work on disconnected elements
+		// Set display:block in place of inst.dpDiv.show() which won't work on diskoneksiected elements
 		// http://bugs.jqueryui.com/ticket/7552 - A Datepicker created on a detached div has zero height
 		inst.dpDiv.css( "display", "block" );
 	},
@@ -9740,7 +9740,7 @@ var plugin = $.ui.plugin = {
 			proto.plugins[ i ].push( [ option, set[ i ] ] );
 		}
 	},
-	call: function( instance, name, args, allowDisconnected ) {
+	call: function( instance, name, args, allowDiskoneksiected ) {
 		var i,
 			set = instance.plugins[ name ];
 
@@ -9748,7 +9748,7 @@ var plugin = $.ui.plugin = {
 			return;
 		}
 
-		if ( !allowDisconnected && ( !instance.element[ 0 ].parentNode ||
+		if ( !allowDiskoneksiected && ( !instance.element[ 0 ].parentNode ||
 				instance.element[ 0 ].parentNode.nodeType === 11 ) ) {
 			return;
 		}
@@ -9797,7 +9797,7 @@ $.widget( "ui.draggable", $.ui.mouse, {
 		addClasses: true,
 		appendTo: "parent",
 		axis: false,
-		connectToSortable: false,
+		koneksiectToSortable: false,
 		containment: false,
 		cursor: "auto",
 		cursorAt: false,
@@ -10524,14 +10524,14 @@ $.widget( "ui.draggable", $.ui.mouse, {
 
 } );
 
-$.ui.plugin.add( "draggable", "connectToSortable", {
+$.ui.plugin.add( "draggable", "koneksiectToSortable", {
 	start: function( event, ui, draggable ) {
 		var uiSortable = $.extend( {}, ui, {
 			item: draggable.element
 		} );
 
 		draggable.sortables = [];
-		$( draggable.options.connectToSortable ).each( function() {
+		$( draggable.options.koneksiectToSortable ).each( function() {
 			var sortable = $( this ).sortable( "instance" );
 
 			if ( sortable && !sortable.options.disabled ) {
@@ -10580,7 +10580,7 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 
 				// Prevent this Sortable from removing the helper.
 				// However, don't set the draggable to remove the helper
-				// either as another connected Sortable may yet handle the removal.
+				// either as another koneksiected Sortable may yet handle the removal.
 				sortable.cancelHelperRemoval = true;
 
 				sortable._trigger( "deactivate", event, uiSortable );
@@ -15503,7 +15503,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 	options: {
 		appendTo: "parent",
 		axis: false,
-		connectWith: false,
+		koneksiectWith: false,
 		containment: false,
 		cursor: "auto",
 		cursorAt: false,
@@ -15953,7 +15953,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			}
 		}
 
-		//Interconnect with droppables
+		//Interkoneksiect with droppables
 		if ( $.ui.ddmanager ) {
 			$.ui.ddmanager.drag( this, event );
 		}
@@ -16069,7 +16069,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 
 	serialize: function( o ) {
 
-		var items = this._getItemsAsjQuery( o && o.connected ),
+		var items = this._getItemsAsjQuery( o && o.koneksiected ),
 			str = [];
 		o = o || {};
 
@@ -16093,7 +16093,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 
 	toArray: function( o ) {
 
-		var items = this._getItemsAsjQuery( o && o.connected ),
+		var items = this._getItemsAsjQuery( o && o.koneksiected ),
 			ret = [];
 
 		o = o || {};
@@ -16200,23 +16200,23 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		return this;
 	},
 
-	_connectWith: function() {
+	_koneksiectWith: function() {
 		var options = this.options;
-		return options.connectWith.constructor === String ?
-			[ options.connectWith ] :
-			options.connectWith;
+		return options.koneksiectWith.constructor === String ?
+			[ options.koneksiectWith ] :
+			options.koneksiectWith;
 	},
 
-	_getItemsAsjQuery: function( connected ) {
+	_getItemsAsjQuery: function( koneksiected ) {
 
 		var i, j, cur, inst,
 			items = [],
 			queries = [],
-			connectWith = this._connectWith();
+			koneksiectWith = this._koneksiectWith();
 
-		if ( connectWith && connected ) {
-			for ( i = connectWith.length - 1; i >= 0; i-- ) {
-				cur = $( connectWith[ i ], this.document[ 0 ] );
+		if ( koneksiectWith && koneksiected ) {
+			for ( i = koneksiectWith.length - 1; i >= 0; i-- ) {
+				cur = $( koneksiectWith[ i ], this.document[ 0 ] );
 				for ( j = cur.length - 1; j >= 0; j-- ) {
 					inst = $.data( cur[ j ], this.widgetFullName );
 					if ( inst && inst !== this && !inst.options.disabled ) {
@@ -16273,12 +16273,12 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			queries = [ [ typeof this.options.items === "function" ?
 				this.options.items.call( this.element[ 0 ], event, { item: this.currentItem } ) :
 				$( this.options.items, this.element ), this ] ],
-			connectWith = this._connectWith();
+			koneksiectWith = this._koneksiectWith();
 
 		//Shouldn't be run the first time through due to massive slow-down
-		if ( connectWith && this.ready ) {
-			for ( i = connectWith.length - 1; i >= 0; i-- ) {
-				cur = $( connectWith[ i ], this.document[ 0 ] );
+		if ( koneksiectWith && this.ready ) {
+			for ( i = koneksiectWith.length - 1; i >= 0; i-- ) {
+				cur = $( koneksiectWith[ i ], this.document[ 0 ] );
 				for ( j = cur.length - 1; j >= 0; j-- ) {
 					inst = $.data( cur[ j ], this.widgetFullName );
 					if ( inst && inst !== this && !inst.options.disabled ) {
@@ -16319,7 +16319,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		for ( i = this.items.length - 1; i >= 0; i-- ) {
 			item = this.items[ i ];
 
-			//We ignore calculating positions of all connected containers when we're not over them
+			//We ignore calculating positions of all koneksiected containers when we're not over them
 			if ( this.currentContainer && item.instance !== this.currentContainer &&
 					item.item[ 0 ] !== this.currentItem[ 0 ] ) {
 				continue;

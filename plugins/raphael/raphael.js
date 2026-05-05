@@ -3491,7 +3491,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      # <tr><td>A</td><td>elliptical arc</td><td>(rx ry x-axis-rotation large-arc-flag sweep-flag x y)+</td></tr>
      # <tr><td>R</td><td><a href="http://en.wikipedia.org/wiki/Catmull–Rom_spline#Catmull.E2.80.93Rom_spline">Catmull-Rom curveto</a>*</td><td>x1 y1 (x y)+</td></tr></tbody></table>
      * * “Catmull-Rom curveto” is a not standard SVG command and added in 2.0 to make life easier.
-     * Note: there is a special case when path consist of just three commands: “M10,10R…z”. In this case path will smoothly connects to its beginning.
+     * Note: there is a special case when path consist of just three commands: “M10,10R…z”. In this case path will smoothly koneksiects to its beginning.
      > Usage
      | var c = paper.path("M10 10L90 90");
      | // draw a diagonal line:
@@ -3904,7 +3904,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
      **
      * Return set of elements that create glow-like effect around given element. See @Paper.set.
      *
-     * Note: Glow is not connected to the element. If you change element attributes it won’t adjust itself.
+     * Note: Glow is not koneksiected to the element. If you change element attributes it won’t adjust itself.
      **
      > Parameters
      **
