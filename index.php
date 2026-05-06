@@ -168,6 +168,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <p>Ganti Password</p>
               </a>
             </li>
+            <li class="nav-item">
+  <a href="index.php?page=skripsi_2511500080" class="nav-link">
+    <i class="far fa-circle nav-icon"></i>
+    <p>Skripsi</p>
+  </a>
+</li>
+      
             </ul>
           </li>
           <li class="nav-item">
